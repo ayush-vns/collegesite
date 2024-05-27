@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <meta http-equiv="refresh" content="50">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            border: 1px solid black;
+
+
+        }
+
+
+        th,
+        td {
+            border: 1px solid black;
+            background-color: rgba(214, 143, 117, 0.82);
+            color: white;
+        }
+
+        th {
+            padding: 10px;
+            text-align: left;
+            color: whitesmoke;
+            background-color: cadetblue;
+        }
+
+        td:hover {
+            background-color: #FFE4E1;
+            color: blueviolet;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+
+
+        <div id="intro"></div>
+
+
+    </div>
+    <script>
+        function getInfo3() {
+            console.log("Running");
+            fetch( 'http://mrghazipur.in/api/msgshow')
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Network response was not ok.');
+                    }
+                })
+                .then(data => {
+
+                    let arr = data;
+                    let n = arr.length;
+
+                    const Div = document.getElementById('intro');
+
+                    let table = '<table>';
+                    table += '<tr><th>Sender</th><th>Receiver</th><th>Message</th></tr>';
+                    for (let i = 0; i <= n - 1; i++) {
+                        console.log(arr[i].name);
+                        table += `<tr><td>${arr[i].frommsg}</td><td>${arr[i].tomsg}</td><td>${arr[i].msg}</td></tr>`;
+                    }
+
+                    table += `</table>`;
+                    // alert(table);
+
+                    // Insert the table into the Div
+                    Div.innerHTML = table;
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        }
+
+        // Call the function to fetch and display the data
+
+    </script>
+    <script>getInfo3();</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
