@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <style>
+        .slider img {
+            width: 50%;
+            height: auto;
+        }
+        .slider {
+            width: 90%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slider">
+    <div><img src="https://paysmoney.in/assets/assets/img/home/jio.png" alt="Image 1"></div>
+    <div><img src="https://paysmoney.in/assets/assets/img/home/bsnl.png" alt="Image 2"></div>
+    <div><img src="https://paysmoney.in/assets/assets/img/home/tatasky.png" alt="Image 3"></div>
+    <div><img src="https://paysmoney.in/assets/assets/img/home/vi.png" alt="Image 4"></div>
+    <div><img src="https://paysmoney.in/assets/assets/img/home/jio.png" alt="Image 5"></div>
+    <div><img src="https://paysmoney.in/assets/assets/img/home/airtel.png" alt="Image 6"></div>
+    <div><img src="https://paysmoney.in/assets/assets/img/home/tatasky.png" alt="Image 7"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.slider').slick({
+            infinite: true,
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            prevArrow: '<button type="button" class="slick-prev">Previous</button>',
+            nextArrow: '<button type="button" class="slick-next">Next</button>'
+        });
+    });
+</script>
+
+</body>
+</html>

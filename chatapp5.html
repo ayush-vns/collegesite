@@ -32,6 +32,9 @@
             color: whitesmoke;
             background-color: cadetblue;
         }
+        td{
+            height: 50px;
+        }
 
         td:hover {
             background-color: #FFE4E1;
@@ -44,54 +47,55 @@
     <div class="container-fluid">
 
 
-        <div id="intro"></div>
+        <div id="output"></div>
 
 
     </div>
     <script>
-        function getInfo3() {
-            console.log("Running");
-            fetch( 'http://mrghazipur.in/api/getchat')
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Network response was not ok.');
-                    }
-                })
-                .then(data => {
-
-                    let arr = data.data;
-                    let n = arr.length;
-
-                    const Div = document.getElementById('intro');
-
-                    let table = '<table>';
-                       
-                    table += '<tr><th>Sender</th><th>Receiver</th><th>Message</th></tr>';
-                    console.log(data);
-                    console.log(arr[0]);
-                    for (let i = 0; i <= n - 1; i++) {
-                       
-                        console.log(arr[i].name);
-                        table += `<tr><td>${arr[i].frommsg}</td><td>${arr[i].tomsg}</td><td>${arr[i].msg}</td></tr>`;
-                    }
-
-                    table += `</table>`;
-                    // alert(table);
-
-                    // Insert the table into the Div
-                    Div.innerHTML = table;
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
+        function fetchCharacter() {
+          // Get the character ID from the input field
+          const characterId = document.getElementById('characterId').value;
+    
+          // Construct the SWAPI URL for the specific character
+          const swapiUrl = `http://mrghazipur.in/api/getchat?frommsg=ayu&tomsg=kd`;
+    
+          // Fetch data from SWAPI using Fetch API
+          fetch(swapiUrl)
+            .then(response => {
+              // Check if the response is successful (status code 200-299)
+              if (!response.ok) {
+                throw new Error(`Error: ${response.status} - ${response.statusText}`);
+              }
+    
+              // Parse the JSON data from the response
+              return response.json();
+            })
+            .then(characterData => {
+              // Display character information on the page
+              displayCharacterInfo(characterData);
+            })
+            .catch(error => {
+              // Display an error message if there's an issue with the fetch
+              displayError(error.message);
+            });
         }
-
-        // Call the function to fetch and display the data
-
-    </script>
-    <script>getInfo3();</script>
+    
+        function displayCharacterInfo(characterData) {
+          const outputDiv = document.getElementById('output');
+          outputDiv.innerHTML = `
+            <h2>${characterData.name}</h2>
+            <p><strong>Height:</strong> ${characterData.frommsg} cm</p>
+            <p><strong>Mass:</strong> ${characterData.tomsg} kg</p>
+            <p><strong>Birth Year:</strong> ${characterData.msg}</p>
+          `;
+        }
+    
+        function displayError(errorMessage) {
+          const outputDiv = document.getElementById('output');
+          outputDiv.innerHTML = `<p style="color: red;">${errorMessage}</p>`;
+        }
+      </script>
+    <!-- <script>getInfo3();</script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
