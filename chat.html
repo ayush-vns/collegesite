@@ -8,16 +8,32 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <style>
+        /* div{
+            border: solid black;
+        } */
         table {
             border-radius: 10px;
             width: 100%;
             margin-top: 10px;
+            background-image: url(pics/landscape-3639879_1920.jpg);
+            background-size: cover;
+
+            background-position: center;
+            background-repeat: no-repeat;
+
         }
 
         th,
         td {
-            background-color: rgba(214, 143, 117, 0.82);
-            color: white;
+
+
+            /* background-color: rgba(214, 143, 117, 0.82); */
+            color: black;
+            text-align: center;
+            text-shadow: 2px 2px 2px gray;
+            border: solid black;
+            border-color: aliceblue;
+
         }
 
         th {
@@ -32,6 +48,7 @@
 
         td {
             height: 60px;
+
         }
 
         td:hover {
@@ -45,8 +62,10 @@
             height: 100vh;
             border: ridge rgb(227, 224, 224);
             border-radius: 10px;
-            /* background-color: rgb(37, 37, 37); */
-            background-image: url(pics/lake-at-night-whatsapp-chat-7r24509213rx0sur.webp);
+            background-image: url(pics/sunset-7607500_1280.jpg);
+            background-size: cover;
+
+            background-position: center;
             background-repeat: no-repeat;
             padding: 0px;
         }
@@ -54,18 +73,30 @@
         .header {
             display: flex;
             align-items: center;
-            background-color: #DCDCDC;
+            /* background-color: #DCDCDC; */
             border-radius: 10px 10px 0 0;
             padding: 10px;
         }
 
         .header img {
             border-radius: 50%;
+            margin-right: 30px;
         }
 
         .header div {
             margin-left: 10px;
             font-weight: bold;
+        }
+
+        .tmsg {
+            background-color: transparent;
+            color: white;
+            border: transparent;
+            text-align: center;
+            box-shadow: -10px 10px 10px rgb(39, 143, 181);
+            width: 100px;
+            border-radius: 10px;
+
         }
 
         .messages {
@@ -78,7 +109,7 @@
         }
 
         .message {
-            color: black;
+            color: white;
             padding: 10px;
             border-radius: 15px;
             max-width: 60%;
@@ -88,11 +119,10 @@
         .message.from {
             color: white;
             background-color: rgba(0, 128, 0, 0.5);
-            /* Adjust the alpha (last value) for transparency */
             backface-visibility: hidden;
             align-self: flex-end;
             border-radius: 15px 15px 15px 0;
-            box-shadow: 5px 5px 5px lightseagreen;
+            box-shadow: -5px 5px 5px lightseagreen;
         }
 
         .message.to {
@@ -155,6 +185,11 @@
                     document.querySelectorAll('.username').forEach(cell => {
                         cell.addEventListener('click', function () {
                             document.querySelector('input[name="tomsg"]').value = this.textContent;
+                            const tomsg = document.querySelector('input[name="tomsg"]').value;
+            const imageUrl = `http://mrghazipur.in/public/pics/${this.textContent}.png`;
+            alert(imageUrl);
+            const imageElement = document.getElementById('uplod');
+            imageElement.src = imageUrl;
                             getInfo3();
                         });
                     });
@@ -174,16 +209,20 @@
                 <div id="intro"></div>
             </div>
             <div class="col-md-4 ">
-                <form id="messageForm" class="chat-container">
+                <form id="messageForm" class="chat-container" method="post" enctype="multipart/form-data">
+                    <input type="file" name="filecontents">
                     <div class="header">
-                        <img src="pics/icon.png" alt="Bootstrap" class="img-fluid" width="40px">
+                        <img src="" alt="Bootstrap" id="uplod" class="img-fluid" width="40px"
+                            style="box-shadow:  5px 2px 5px rgb(39, 143, 181);">
                         <input name="frommsg" id="frommsg" style="display: none;">
-                        <input type="text" name="tomsg" required class="form-control" placeholder="Enter Receiver">
+                        <!-- <h1  name="tomsg"></h1> -->
+                        <input class="tmsg" name="tomsg" required>
                     </div>
                     <div class="messages" id="messages"></div>
 
                     <div class="input-area">
-                        <textarea class="form-control" rows="1" placeholder="Message.." name="msg" required></textarea>
+                        <textarea class="form-control" rows="1" placeholder="Message.." name="msg"
+                            style="background: transparent; color: white;" required></textarea>
                         <button type="submit" class="btn btn-primary">Send</button>
                     </div>
                 </form>
@@ -194,6 +233,14 @@
     </div>
 
     <script>
+        function uplodimages() {
+            const tomsg = document.querySelector('input[name="tomsg"]').value;
+            const imageUrl = `http://mrghazipur.in/public/pics/${tomsg}.png`;
+            // alert(imageUrl);
+            // const imageElement = document.getElementById('uplod');
+            // imageElement.src = imageUrl;
+        }
+
         const currentUsername = localStorage.getItem('username');
 
         function getInfo3() {
@@ -288,5 +335,12 @@
                 document.getElementById('error-message').style.color = 'red';
             }
         });
+
     </script>
-    <script src="https://
+    <script> uplodimages();</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
